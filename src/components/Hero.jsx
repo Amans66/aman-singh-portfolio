@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FiDownload, FiMail, FiArrowRight } from 'react-icons/fi';
+import bgImg from '../assets/hacker-bg.png';
 
 const terminalSequence = [
   { type: 'prompt', text: '~ $', delay: 300 },
@@ -55,7 +56,7 @@ export default function Hero() {
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundImage: 'url(/hacker-bg.png)',
+          backgroundImage: `url(${bgImg})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           mixBlendMode: 'screen',

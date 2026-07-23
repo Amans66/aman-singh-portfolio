@@ -1,7 +1,8 @@
 import { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FiShield, FiTarget, FiCode, FiAward } from 'react-icons/fi';
+import { FiShield, FiTarget, FiCode, FiAward, FiUser } from 'react-icons/fi';
+import profileImg from '../assets/profile.jpg';
 
 const stats = [
   { icon: <FiCode />, value: 101, suffix: '', label: 'THM Rooms (Top 4%)' },
@@ -84,8 +85,12 @@ export default function About() {
                 position: 'relative',
               }}>
                 <img
-                  src="/profile.jpg"
+                  src={profileImg}
                   alt="Aman Singh"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    if (e.target.nextSibling) e.target.nextSibling.style.display = 'flex';
+                  }}
                   style={{
                     width: '100%',
                     height: '100%',
@@ -94,6 +99,18 @@ export default function About() {
                     display: 'block',
                   }}
                 />
+                <div style={{
+                  display: 'none',
+                  width: '100%',
+                  height: '100%',
+                  background: 'rgba(0,255,159,0.1)',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#00ff9f',
+                  fontSize: '3rem'
+                }}>
+                  <FiUser />
+                </div>
                 {/* Scanline overlay */}
                 <div style={{
                   position: 'absolute',

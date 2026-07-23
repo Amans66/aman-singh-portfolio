@@ -33,21 +33,21 @@ function generateTHMActivityGrid() {
   
   for (let col = 0; col < COLS; col++) {
     for (let row = 0; row < ROWS; row++) {
-      // Columns represent weeks roughly. 52 weeks total.
-      // Jan-Mar is roughly weeks 0-12
-      // Apr-Jun is roughly weeks 13-25
-      // Jul onwards is weeks 26-51
-      
+      // COLS 0..12 -> Jan-Mar (mostly empty or occasional 1)
+      // COLS 13..24 -> Apr-Jun (heavy activity level 3 & 4)
+      // COLS 25..51 -> Jul-Dec (empty/future)
       let val = 0;
-      if (col >= 0 && col <= 12) {
-        // Light activity
-        val = Math.random() > 0.4 ? (Math.random() > 0.5 ? 1 : 2) : 0;
-      } else if (col >= 13 && col <= 25) {
-        // High activity
-        val = Math.random() > 0.2 ? (Math.random() > 0.5 ? 3 : 4) : 1;
-      } else {
-        // Empty
-        val = 0;
+      if (col >= 13 && col <= 24) {
+        // High density activity like in TryHackMe profile screenshot
+        if ((row === 0 || row === 2 || row === 4 || row === 6) && col === 20) {
+          val = 2; // slight variation
+        } else if (Math.random() > 0.15) {
+          val = Math.random() > 0.4 ? 4 : 3;
+        } else {
+          val = 0;
+        }
+      } else if (col >= 10 && col <= 12) {
+        val = Math.random() > 0.6 ? 1 : 0;
       }
       
       cells.push(val === 0 ? 'thm-cell' : `thm-cell thm-l${val}`);
