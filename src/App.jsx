@@ -7,6 +7,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
 import Skills from './components/Skills';
+import SOCDashboard from './components/SOCDashboard';
 import Projects from './components/Projects';
 import InteractiveTerminal from './components/InteractiveTerminal';
 import GithubSection from './components/GithubSection';
@@ -40,6 +41,7 @@ function App() {
         <Hero />
         <About />
         <Skills />
+        <SOCDashboard />
         <Projects />
         <InteractiveTerminal />
         <GithubSection />
