@@ -3,26 +3,26 @@
 /* ==============================
    PREMIUM DESIGN TOKENS
    ============================== */
-:root, [data-theme="bright"] {
-  --bg-dark: #f8fafc;
-  --bg-gradient: radial-gradient(circle at 50% 0%, #e0f2fe 0%, #edf4fc 50%, #f8fafc 100%);
-  --neon-green: #0284c7; /* Electric Cyan Blue */
-  --neon-cyan: #0d9488;  /* Cyber Teal */
-  --neon-purple: #7c3aed; /* Deep Indigo */
-  --neon-pink: #e11d48;   /* Bright Crimson */
+:root, [data-theme="cyber"] {
+  --bg-dark: #030712;
+  --bg-gradient: radial-gradient(circle at 50% 0%, #0b172a 0%, #030712 75%);
+  --neon-green: #00ff9f; /* Electric Emerald Green */
+  --neon-cyan: #00f0ff;  /* Cyber Cyan Blue */
+  --neon-purple: #bd00ff; /* Neon Violet */
+  --neon-pink: #ff0055;   /* Cyber Pink */
   
-  --text-primary: #0f172a;
-  --text-secondary: #334155;
-  --text-dim: #64748b;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-dim: #475569;
   
-  --glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(241, 245, 249, 0.95) 100%);
-  --glass-border: rgba(2, 132, 199, 0.25);
-  --glass-border-light: rgba(2, 132, 199, 0.6);
-  --glass-shadow: 0 10px 30px rgba(15, 23, 42, 0.08), inset 0 0 20px rgba(2, 132, 199, 0.05);
+  --glass-bg: linear-gradient(135deg, rgba(15, 23, 42, 0.75) 0%, rgba(8, 12, 22, 0.9) 100%);
+  --glass-border: rgba(0, 240, 255, 0.22);
+  --glass-border-light: rgba(0, 240, 255, 0.6);
+  --glass-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(0, 240, 255, 0.05);
   
-  --glow-green: 0 0 12px rgba(2,132,199,0.4), 0 0 24px rgba(2,132,199,0.2);
-  --glow-cyan: 0 0 12px rgba(13,148,136,0.4), 0 0 24px rgba(13,148,136,0.2);
-  --glow-purple: 0 0 12px rgba(124,58,237,0.4), 0 0 24px rgba(124,58,237,0.2);
+  --glow-green: 0 0 12px rgba(0,255,159,0.5), 0 0 24px rgba(0,255,159,0.25);
+  --glow-cyan: 0 0 12px rgba(0,240,255,0.5), 0 0 24px rgba(0,240,255,0.25);
+  --glow-purple: 0 0 12px rgba(189,0,255,0.5), 0 0 24px rgba(189,0,255,0.25);
 
   --font-heading: 'Orbitron', sans-serif;
   --font-mono: 'Fira Code', monospace;

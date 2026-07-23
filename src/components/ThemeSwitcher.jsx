@@ -3,19 +3,20 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FiSliders } from 'react-icons/fi';
 
 const themes = [
-  { id: 'bright', name: 'Modern Bright', color: '#0284c7', bg: '#f8fafc' },
+  { id: 'cyber', name: 'Cyber Emerald', color: '#00ff9f', bg: '#030712' },
   { id: 'matrix', name: 'Matrix Green', color: '#00ff41', bg: '#030508' },
   { id: 'cyberpunk', name: 'Cyberpunk Neon', color: '#ff007f', bg: '#070312' },
   { id: 'ice', name: 'Ghost Ice Blue', color: '#00e1ff', bg: '#020b14' },
   { id: 'redteam', name: 'RedTeam Blood', color: '#ff003c', bg: '#0d0205' },
+  { id: 'bright', name: 'Modern Bright', color: '#0284c7', bg: '#f8fafc' },
 ];
 
 export default function ThemeSwitcher() {
-  const [activeTheme, setActiveTheme] = useState('bright');
+  const [activeTheme, setActiveTheme] = useState('cyber');
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('hacker_portfolio_theme') || 'bright';
+    const savedTheme = localStorage.getItem('hacker_portfolio_theme') || 'cyber';
     setActiveTheme(savedTheme);
     document.documentElement.setAttribute('data-theme', savedTheme);
   }, []);
