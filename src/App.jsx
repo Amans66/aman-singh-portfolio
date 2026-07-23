@@ -18,6 +18,7 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import SystemLogs from './components/SystemLogs';
 import KonamiEasterEgg from './components/KonamiEasterEgg';
+import ThemeSwitcher from './components/ThemeSwitcher';
 
 function App() {
   const [booted, setBooted] = useState(false);
@@ -51,6 +52,7 @@ function App() {
       <Footer />
       <SystemLogs />
       <KonamiEasterEgg />
+      <ThemeSwitcher />
     </>
   );
 }

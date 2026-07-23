@@ -3,30 +3,96 @@
 /* ==============================
    PREMIUM DESIGN TOKENS
    ============================== */
-:root {
+:root, [data-theme="matrix"] {
   --bg-dark: #030508;
-  --bg-gradient: radial-gradient(circle at 50% 0%, #111a22 0%, #030508 70%);
-  --neon-green: #00ff41; /* True matrix green */
-  --neon-cyan: #00f0ff;  /* Cyberpunk blue */
-  --neon-purple: #bd00ff; /* Deep synthwave purple */
-  --neon-pink: #ff003c;   /* Cyberpunk pink */
+  --bg-gradient: radial-gradient(circle at 50% 0%, #0d1a12 0%, #030508 70%);
+  --neon-green: #00ff41;
+  --neon-cyan: #00f0ff;
+  --neon-purple: #bd00ff;
+  --neon-pink: #ff003c;
   
   --text-primary: #f0f4f8;
   --text-secondary: #a0aec0;
   --text-dim: #4a5568;
   
-  --glass-bg: linear-gradient(135deg, rgba(16, 20, 28, 0.6) 0%, rgba(10, 13, 18, 0.8) 100%);
-  --glass-border: rgba(0, 255, 65, 0.2);
-  --glass-border-light: rgba(0, 255, 65, 0.5);
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(0, 255, 65, 0.05);
+  --glass-bg: linear-gradient(135deg, rgba(10, 20, 15, 0.75) 0%, rgba(5, 10, 8, 0.9) 100%);
+  --glass-border: rgba(0, 255, 65, 0.25);
+  --glass-border-light: rgba(0, 255, 65, 0.6);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.7), inset 0 0 20px rgba(0, 255, 65, 0.08);
   
-  --glow-green: 0 0 10px rgba(0,255,65,0.5), 0 0 20px rgba(0,255,65,0.3);
-  --glow-cyan: 0 0 10px rgba(0,240,255,0.5), 0 0 20px rgba(0,240,255,0.3);
-  --glow-purple: 0 0 10px rgba(189,0,255,0.5), 0 0 20px rgba(189,0,255,0.3);
+  --glow-green: 0 0 10px rgba(0,255,65,0.6), 0 0 20px rgba(0,255,65,0.35);
+  --glow-cyan: 0 0 10px rgba(0,240,255,0.6), 0 0 20px rgba(0,240,255,0.35);
+  --glow-purple: 0 0 10px rgba(189,0,255,0.6), 0 0 20px rgba(189,0,255,0.35);
 
   --font-heading: 'Orbitron', sans-serif;
   --font-mono: 'Fira Code', monospace;
   --font-body: 'Space Grotesk', sans-serif;
+}
+
+[data-theme="cyberpunk"] {
+  --bg-dark: #070312;
+  --bg-gradient: radial-gradient(circle at 50% 0%, #20083b 0%, #070312 75%);
+  --neon-green: #ff007f;
+  --neon-cyan: #00f0ff;
+  --neon-purple: #e000ff;
+  --neon-pink: #ff0055;
+  
+  --text-primary: #fce8ff;
+  --text-secondary: #b8a5d1;
+  --text-dim: #6d5885;
+  
+  --glass-bg: linear-gradient(135deg, rgba(25, 10, 40, 0.75) 0%, rgba(12, 5, 22, 0.9) 100%);
+  --glass-border: rgba(255, 0, 127, 0.3);
+  --glass-border-light: rgba(255, 0, 127, 0.7);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(255, 0, 127, 0.1);
+  
+  --glow-green: 0 0 10px rgba(255,0,127,0.7), 0 0 20px rgba(255,0,127,0.4);
+  --glow-cyan: 0 0 10px rgba(0,240,255,0.7), 0 0 20px rgba(0,240,255,0.4);
+  --glow-purple: 0 0 10px rgba(224,0,255,0.7), 0 0 20px rgba(224,0,255,0.4);
+}
+
+[data-theme="ice"] {
+  --bg-dark: #020b14;
+  --bg-gradient: radial-gradient(circle at 50% 0%, #082545 0%, #020b14 75%);
+  --neon-green: #00e1ff;
+  --neon-cyan: #38bdf8;
+  --neon-purple: #6366f1;
+  --neon-pink: #0284c7;
+  
+  --text-primary: #e0f2fe;
+  --text-secondary: #94a3b8;
+  --text-dim: #475569;
+  
+  --glass-bg: linear-gradient(135deg, rgba(8, 30, 55, 0.75) 0%, rgba(3, 15, 30, 0.9) 100%);
+  --glass-border: rgba(0, 225, 255, 0.3);
+  --glass-border-light: rgba(0, 225, 255, 0.7);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(0, 225, 255, 0.1);
+  
+  --glow-green: 0 0 10px rgba(0,225,255,0.7), 0 0 20px rgba(0,225,255,0.4);
+  --glow-cyan: 0 0 10px rgba(56,189,248,0.7), 0 0 20px rgba(56,189,248,0.4);
+  --glow-purple: 0 0 10px rgba(99,102,241,0.7), 0 0 20px rgba(99,102,241,0.4);
+}
+
+[data-theme="redteam"] {
+  --bg-dark: #0d0205;
+  --bg-gradient: radial-gradient(circle at 50% 0%, #30060e 0%, #0d0205 75%);
+  --neon-green: #ff003c;
+  --neon-cyan: #ff9900;
+  --neon-purple: #e60000;
+  --neon-pink: #ff3300;
+  
+  --text-primary: #ffe8ec;
+  --text-secondary: #cfa3ac;
+  --text-dim: #7a5259;
+  
+  --glass-bg: linear-gradient(135deg, rgba(40, 8, 15, 0.75) 0%, rgba(18, 3, 7, 0.9) 100%);
+  --glass-border: rgba(255, 0, 60, 0.35);
+  --glass-border-light: rgba(255, 0, 60, 0.75);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.85), inset 0 0 20px rgba(255, 0, 60, 0.12);
+  
+  --glow-green: 0 0 10px rgba(255,0,60,0.7), 0 0 20px rgba(255,0,60,0.4);
+  --glow-cyan: 0 0 10px rgba(255,153,0,0.7), 0 0 20px rgba(255,153,0,0.4);
+  --glow-purple: 0 0 10px rgba(230,0,0,0.7), 0 0 20px rgba(230,0,0,0.4);
 }
 
 /* ==============================
