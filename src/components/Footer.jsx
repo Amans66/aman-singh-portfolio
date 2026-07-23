@@ -1,56 +1,103 @@
 import { useState, useEffect } from 'react';
-import { FiGithub, FiLinkedin, FiMail } from 'react-icons/fi';
+import { FiGithub, FiLinkedin, FiMail, FiArrowUp, FiShield } from 'react-icons/fi';
 
 export default function Footer() {
-  const [time, setTime] = useState('');
-  const [session, setSession] = useState('0m 0s');
-  const [startTime] = useState(Date.now());
+  const [utcTime, setUtcTime] = useState('');
+  const [istTime, setIstTime] = useState('');
 
   useEffect(() => {
     const timer = setInterval(() => {
       const now = new Date();
-      const ist = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
-      setTime(ist.toLocaleTimeString('en-US', { hour12: false }));
-
-      const elapsed = Math.floor((Date.now() - startTime) / 1000);
-      const mins = Math.floor(elapsed / 60);
-      const secs = elapsed % 60;
-      setSession(`${mins}m ${secs}s`);
+      setUtcTime(now.toUTCString().slice(17, 25) + ' UTC');
+      setIstTime(now.toLocaleTimeString('en-US', { timeZone: 'Asia/Kolkata', hour12: false }) + ' IST');
     }, 1000);
     return () => clearInterval(timer);
-  }, [startTime]);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <footer className="site-footer">
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '2rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
-        <a href="https://github.com/Amans66" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', transition: 'all 0.3s' }} className="footer-social">
-          <FiGithub />
-        </a>
-        <a href="https://www.linkedin.com/in/aman-singh66/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', transition: 'all 0.3s' }} className="footer-social">
-          <FiLinkedin />
-        </a>
-        <a href="mailto:amansinghbhadauria2005@gmail.com" style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', transition: 'all 0.3s' }} className="footer-social">
-          <FiMail />
-        </a>
-      </div>
+      <div style={{ maxWidth: '1300px', margin: '0 auto' }}>
+        
+        {/* Top Footer Grid */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2.5rem', textCenter: 'left', marginBottom: '2.5rem', paddingBottom: '2rem', borderBottom: '1px solid rgba(255, 255, 255, 0.08)' }}>
+          
+          {/* Col 1: Branding & Quote */}
+          <div style={{ textAlign: 'left' }}>
+            <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.2rem', color: '#fff', marginBottom: '0.8rem' }}>
+              [ AMAN<span style={{ color: 'var(--primary)' }}>_</span>SINGH ]
+            </div>
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: '1.6', marginBottom: '1rem' }}>
+              Cybersecurity Analyst specializing in VAPT, SOC log triage, malware analysis, and security tool development.
+            </p>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--primary)', fontStyle: 'italic' }}>
+              "Securing digital frontiers through defensive rigor."
+            </div>
+          </div>
 
-      <div style={{ marginBottom: '0.75rem' }}>
-        <span style={{ color: '#00ff9f', fontFamily: 'var(--font-heading)', letterSpacing: '2px' }}>
-          [ AMAN_SINGH ]
-        </span>
-      </div>
+          {/* Col 2: Quick Links */}
+          <div style={{ textAlign: 'left' }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: 'var(--secondary)', marginBottom: '0.8rem', fontWeight: 600 }}>
+              // NAVIGATION
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.4rem', fontFamily: 'var(--font-mono)', fontSize: '0.8rem' }}>
+              <a href="#about" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>About</a>
+              <a href="#skills" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>Skills</a>
+              <a href="#soc-dashboard" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>SOC Dashboard</a>
+              <a href="#projects" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>Projects</a>
+              <a href="#tools" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>Tools</a>
+              <a href="#experience" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>Experience</a>
+              <a href="#tryhackme" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>TryHackMe</a>
+              <a href="#contact" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>Contact</a>
+            </div>
+          </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '2rem', fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--text-dim)', flexWrap: 'wrap' }}>
-        <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-          <span style={{
-            width: '6px', height: '6px', borderRadius: '50%', background: '#00ff41',
-            boxShadow: '0 0 6px #00ff41', display: 'inline-block',
-            animation: 'pulse-dot 2s ease-in-out infinite'
-          }} />
-          SYSTEM: ONLINE
-        </span>
-        <span>⏱ {time} IST</span>
-        <span>SESSION: {session}</span>
+          {/* Col 3: Live System Status & UTC Clock */}
+          <div style={{ textAlign: 'left' }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: 'var(--accent)', marginBottom: '0.8rem', fontWeight: 600 }}>
+              // TELEMETRY & SYSTEM TIME
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <span className="live-dot" /> SYSTEM STATUS: ONLINE
+              </span>
+              <span>⏱ UTC: {utcTime}</span>
+              <span>⏱ IST: {istTime}</span>
+              <span style={{ color: 'var(--primary)', marginTop: '0.4rem' }}>✓ Encrypted Session Active</span>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Bottom Footer Bar */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'var(--text-dim)' }}>
+          <div>
+            © {new Date().getFullYear()} Aman Singh. Built with React & Vite. All rights reserved.
+          </div>
+
+          <div style={{ display: 'flex', gap: '1.2rem', fontSize: '1.2rem' }}>
+            <a href="https://github.com/Amans66" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-secondary)' }}>
+              <FiGithub />
+            </a>
+            <a href="https://www.linkedin.com/in/aman-singh66/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-secondary)' }}>
+              <FiLinkedin />
+            </a>
+            <a href="mailto:amansinghbhadauria2005@gmail.com" style={{ color: 'var(--text-secondary)' }}>
+              <FiMail />
+            </a>
+          </div>
+
+          <button
+            onClick={scrollToTop}
+            style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', background: 'none', border: '1px solid rgba(0, 255, 157, 0.3)', padding: '0.4rem 0.8rem', borderRadius: '6px', color: 'var(--primary)', fontFamily: 'var(--font-mono)', fontSize: '0.75rem', cursor: 'pointer' }}
+          >
+            Back to Top <FiArrowUp />
+          </button>
+        </div>
+
       </div>
     </footer>
   );
