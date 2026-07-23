@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FiDownload, FiMail, FiGithub, FiLinkedin, FiExternalLink, FiShield, FiBriefcase, FiCode, FiAward, FiBookOpen } from 'react-icons/fi';
+import { FiDownload, FiMail, FiGithub, FiLinkedin, FiExternalLink, FiMapPin, FiCheckCircle } from 'react-icons/fi';
 import profileImg from './assets/profile.jpg';
 
 export default function App() {
@@ -7,13 +7,13 @@ export default function App() {
 
   return (
     <div>
-      {/* Navbar */}
+      {/* Navigation */}
       <nav className="navbar">
         <div className="container nav-flex">
-          <a href="#home" className="logo">
-            <span>AMAN</span>_SINGH
+          <a href="#home" className="nav-logo">
+            Aman <span>Singh</span>
           </a>
-          <ul className="nav-menu">
+          <ul className="nav-links">
             <li><a href="#about">About</a></li>
             <li><a href="#experience">Experience</a></li>
             <li><a href="#skills">Skills</a></li>
@@ -24,30 +24,34 @@ export default function App() {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="simple-section" style={{ paddingTop: '4rem', paddingBottom: '4rem' }}>
+      <section id="home" className="section" style={{ paddingTop: '4rem', paddingBottom: '4rem' }}>
         <div className="container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '3rem', alignItems: 'center' }}>
           <div>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: 'var(--accent-green)', marginBottom: '0.8rem' }}>
-              // CYBERSECURITY ANALYST & VAPT SPECIALIST
+            <div style={{ display: 'inline-block', padding: '0.35rem 0.85rem', background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: '20px', fontSize: '0.85rem', fontWeight: 600, color: '#1d4ed8', marginBottom: '1.2rem' }}>
+              Cybersecurity Analyst & Pentester
             </div>
-            <h1 style={{ fontSize: '2.8rem', fontWeight: 800, lineHeight: 1.15, marginBottom: '1.2rem', color: '#fff' }}>
+            <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: '2.6rem', fontWeight: 800, lineHeight: 1.15, marginBottom: '1.2rem', color: 'var(--text-main)' }}>
               Hi, I'm Aman Singh
             </h1>
-            <p style={{ fontSize: '1.05rem', color: 'var(--text-secondary)', marginBottom: '1.8rem', lineHeight: 1.7 }}>
-              Aspiring Cybersecurity Analyst with hands-on experience in <span style={{ color: 'var(--accent-green)', fontWeight: 600 }}>Vulnerability Assessment & Penetration Testing (VAPT)</span>, malware analysis, network security, and secure software development. Proficient in Burp Suite, OWASP ZAP, Nmap, Wireshark, Python, and Kali Linux.
+            <p style={{ fontSize: '1.05rem', color: 'var(--text-muted)', marginBottom: '1.8rem', lineHeight: 1.7 }}>
+              Cybersecurity Analyst with hands-on experience in Vulnerability Assessment & Penetration Testing (VAPT), malware analysis, network security, and secure software development. Proficient in Burp Suite, OWASP ZAP, Nmap, Wireshark, Python, and Kali Linux.
             </p>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.9rem', color: 'var(--text-light)', marginBottom: '2rem' }}>
+              <FiMapPin style={{ color: 'var(--primary)' }} /> Rohta, Agra, Uttar Pradesh, India
+            </div>
 
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
               <a
                 href="https://drive.google.com/drive/folders/10nyIP-jmDWtC1goj-8wSFlDVozgWaKBg?usp=drive_link"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-primary"
+                className="btn-primary"
               >
-                <FiDownload /> Resume
+                <FiDownload /> Download Resume
               </a>
-              <a href="#contact" className="btn btn-outline">
-                <FiMail /> Contact Me
+              <a href="#contact" className="btn-secondary">
+                <FiMail /> Get in Touch
               </a>
             </div>
           </div>
@@ -57,174 +61,215 @@ export default function App() {
               src={profileImg}
               alt="Aman Singh"
               onError={(e) => { e.target.style.display = 'none'; }}
-              style={{ width: '220px', height: '220px', borderRadius: '20px', objectFit: 'cover', border: '2px solid var(--accent-green)', margin: '0 auto' }}
+              style={{ width: '220px', height: '220px', borderRadius: '50%', objectFit: 'cover', border: '4px solid #f1f5f9', boxShadow: '0 10px 25px rgba(0,0,0,0.1)', margin: '0 auto' }}
             />
           </div>
         </div>
       </section>
 
-      {/* About & Experience */}
-      <section id="about" className="simple-section">
+      {/* About Section */}
+      <section id="about" className="section">
         <div className="container">
-          <div className="section-heading">
-            <FiShield /> <span>About</span> & Experience
-          </div>
+          <h2 className="section-title">About Me</h2>
 
-          <div className="simple-card">
-            <h3 style={{ fontSize: '1.3rem', color: '#fff', marginBottom: '0.8rem' }}>
-              Career Profile
-            </h3>
-            <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '1.5rem' }}>
-              Top 4% ranking on TryHackMe with 101 completed practical security labs covering web exploitation, privilege escalation, networking, and defensive operations. Passionate about identifying security misconfigurations and hardening system infrastructure.
+          <div className="card">
+            <p style={{ fontSize: '1.05rem', color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: '1.5rem' }}>
+              I specialize in analyzing web applications and internal network systems to identify security vulnerabilities and misconfigurations. Ranked in the top 4% globally on TryHackMe with 101 completed practical security labs covering web exploitation, privilege escalation, networking, and defensive operations.
             </p>
 
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-              <span className="tag">VAPT & Web Security</span>
-              <span className="tag tag-blue">OWASP Top 10</span>
-              <span className="tag">Malware Analysis</span>
-              <span className="tag tag-blue">TryHackMe Top 4%</span>
+              <span className="badge">Vulnerability Assessment (VAPT)</span>
+              <span className="badge">OWASP Top 10</span>
+              <span className="badge">Malware Behavior Analysis</span>
+              <span className="badge">TryHackMe Top 4%</span>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div id="experience" className="simple-card">
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', marginBottom: '0.6rem' }}>
-              <h3 style={{ fontSize: '1.2rem', color: '#fff', margin: 0 }}>
-                Cyber Security Intern
-              </h3>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'var(--accent-blue)' }}>
+      {/* Experience Section */}
+      <section id="experience" className="section">
+        <div className="container">
+          <h2 className="section-title">Work Experience</h2>
+
+          <div className="card">
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.4rem' }}>
+              <div>
+                <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-main)', margin: 0 }}>
+                  Cyber Security Intern
+                </h3>
+                <div style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--primary)', marginTop: '0.2rem' }}>
+                  Indian Cyber Security Solutions (ICSS), Kolkata
+                </div>
+              </div>
+              <span style={{ fontSize: '0.85rem', fontWeight: 600, padding: '0.3rem 0.8rem', background: '#f1f5f9', borderRadius: '20px', color: 'var(--text-muted)' }}>
                 Jul 2025 – Oct 2025
               </span>
             </div>
-            <div style={{ color: 'var(--accent-green)', fontFamily: 'var(--font-mono)', fontSize: '0.9rem', marginBottom: '1rem' }}>
-              Indian Cyber Security Solutions (ICSS), Kolkata
-            </div>
 
-            <ul style={{ paddingLeft: '1.2rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>
+            <ul style={{ paddingLeft: '1.2rem', marginTop: '1rem', color: 'var(--text-muted)', lineHeight: 1.7 }}>
               <li>Conducted Vulnerability Assessment and Penetration Testing (VAPT) on 10+ web applications and internal systems.</li>
               <li>Identified security misconfigurations, insecure endpoints, outdated software, and OWASP Top 10 vulnerabilities.</li>
-              <li>Validated remediation efforts and prepared technical reports following OWASP Top 10 and MITRE ATT&CK.</li>
+              <li>Validated remediation efforts and prepared technical reports following OWASP Top 10 and MITRE ATT&CK guidelines.</li>
+              <li>Collaborated with senior security analysts during penetration testing engagements and security assessments.</li>
             </ul>
           </div>
         </div>
       </section>
 
       {/* Technical Skills */}
-      <section id="skills" className="simple-section">
+      <section id="skills" className="section">
         <div className="container">
-          <div className="section-heading">
-            <FiCode /> Technical <span>Skills</span>
-          </div>
+          <h2 className="section-title">Technical Skills</h2>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.2rem' }}>
-            <div className="simple-card" style={{ marginBottom: 0 }}>
-              <h4 style={{ color: 'var(--accent-green)', fontFamily: 'var(--font-mono)', marginBottom: '0.8rem' }}>// SECURITY TOOLS</h4>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.5rem' }}>
+            <div className="card" style={{ marginBottom: 0 }}>
+              <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '1rem' }}>
+                Security Tools
+              </h3>
               <div>
-                <span className="tag">Burp Suite</span>
-                <span className="tag">OWASP ZAP</span>
-                <span className="tag">Nmap</span>
-                <span className="tag">Nikto</span>
-                <span className="tag">Wireshark</span>
-                <span className="tag">Metasploit</span>
+                <span className="badge tag-gray">Burp Suite</span>
+                <span className="badge tag-gray">OWASP ZAP</span>
+                <span className="badge tag-gray">Nmap</span>
+                <span className="badge tag-gray">Nikto</span>
+                <span className="badge tag-gray">Wireshark</span>
+                <span className="badge tag-gray">Metasploit</span>
               </div>
             </div>
 
-            <div className="simple-card" style={{ marginBottom: 0 }}>
-              <h4 style={{ color: 'var(--accent-blue)', fontFamily: 'var(--font-mono)', marginBottom: '0.8rem' }}>// PROGRAMMING & OS</h4>
+            <div className="card" style={{ marginBottom: 0 }}>
+              <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '1rem' }}>
+                Programming & Operating Systems
+              </h3>
               <div>
-                <span className="tag tag-blue">Python</span>
-                <span className="tag tag-blue">Kali Linux</span>
-                <span className="tag tag-blue">Windows</span>
-                <span className="tag tag-blue">MySQL</span>
-                <span className="tag tag-blue">MongoDB</span>
+                <span className="badge tag-gray">Python</span>
+                <span className="badge tag-gray">Kali Linux</span>
+                <span className="badge tag-gray">Windows</span>
+                <span className="badge tag-gray">MySQL</span>
+                <span className="badge tag-gray">MongoDB</span>
+              </div>
+            </div>
+
+            <div className="card" style={{ marginBottom: 0 }}>
+              <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '1rem' }}>
+                Core Concepts
+              </h3>
+              <div>
+                <span className="badge tag-gray">VAPT</span>
+                <span className="badge tag-gray">OWASP Top 10</span>
+                <span className="badge tag-gray">Malware Analysis</span>
+                <span className="badge tag-gray">Networking</span>
+                <span className="badge tag-gray">Cryptography</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Projects */}
-      <section id="projects" className="simple-section">
+      {/* Key Projects */}
+      <section id="projects" className="section">
         <div className="container">
-          <div className="section-heading">
-            <FiBriefcase /> Security <span>Projects</span>
-          </div>
+          <h2 className="section-title">Key Projects</h2>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
-            <div className="simple-card" style={{ marginBottom: 0 }}>
-              <h3 style={{ color: '#fff', fontSize: '1.2rem', marginBottom: '0.4rem' }}>Threat Detection Suite</h3>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '1rem' }}>
-                Real-time network security monitoring dashboard designed to analyze traffic, sniff TCP SYN packets, and flag malicious payloads.
-              </p>
-              <div style={{ marginBottom: '1rem' }}>
-                <span className="tag">Python</span>
-                <span className="tag">Scapy</span>
-                <span className="tag">Streamlit</span>
+            <div className="card" style={{ marginBottom: 0, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <div>
+                <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.4rem' }}>
+                  Threat Detection Suite
+                </h3>
+                <p style={{ fontSize: '0.92rem', color: 'var(--text-muted)', marginBottom: '1.2rem', lineHeight: 1.6 }}>
+                  Real-time network security monitoring dashboard built with Python and Scapy to sniff network packets, inspect TCP SYN scans, and flag web injection attempts.
+                </p>
               </div>
-              <a href="https://github.com/Amans66/Threat-Detection-Suite" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-blue)', textDecoration: 'none', fontSize: '0.85rem', fontFamily: 'var(--font-mono)' }}>
-                GitHub Repo <FiExternalLink />
-              </a>
+
+              <div>
+                <div style={{ marginBottom: '1rem' }}>
+                  <span className="badge tag-gray">Python</span>
+                  <span className="badge tag-gray">Scapy</span>
+                  <span className="badge tag-gray">Streamlit</span>
+                </div>
+                <a href="https://github.com/Amans66/Threat-Detection-Suite" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
+                  View Repository <FiExternalLink />
+                </a>
+              </div>
             </div>
 
-            <div className="simple-card" style={{ marginBottom: 0 }}>
-              <h3 style={{ color: '#fff', fontSize: '1.2rem', marginBottom: '0.4rem' }}>ShieldCrypt</h3>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '1rem' }}>
-                CLI security tool combining AES-256 GCM encryption with custom substitution ciphers for confidential file protection.
-              </p>
-              <div style={{ marginBottom: '1rem' }}>
-                <span className="tag">Python</span>
-                <span className="tag">PyCryptodome</span>
+            <div className="card" style={{ marginBottom: 0, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <div>
+                <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.4rem' }}>
+                  ShieldCrypt
+                </h3>
+                <p style={{ fontSize: '0.92rem', color: 'var(--text-muted)', marginBottom: '1.2rem', lineHeight: 1.6 }}>
+                  Dual-layer command-line encryption tool combining AES-256 GCM encryption with custom substitution ciphers for securing sensitive data.
+                </p>
               </div>
-              <a href="https://github.com/Amans66/ShieldCrypt" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-blue)', textDecoration: 'none', fontSize: '0.85rem', fontFamily: 'var(--font-mono)' }}>
-                GitHub Repo <FiExternalLink />
-              </a>
+
+              <div>
+                <div style={{ marginBottom: '1rem' }}>
+                  <span className="badge tag-gray">Python</span>
+                  <span className="badge tag-gray">PyCryptodome</span>
+                </div>
+                <a href="https://github.com/Amans66/ShieldCrypt" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
+                  View Repository <FiExternalLink />
+                </a>
+              </div>
             </div>
 
-            <div className="simple-card" style={{ marginBottom: 0 }}>
-              <h3 style={{ color: '#fff', fontSize: '1.2rem', marginBottom: '0.4rem' }}>Delta – Malware Lab</h3>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '1rem' }}>
-                Isolated virtual analysis lab for monitoring malware process execution, registry modifications, and network C2 traffic.
-              </p>
-              <div style={{ marginBottom: '1rem' }}>
-                <span className="tag">VMware</span>
-                <span className="tag">Wireshark</span>
-                <span className="tag">Procmon</span>
+            <div className="card" style={{ marginBottom: 0, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <div>
+                <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.4rem' }}>
+                  Delta – Malware Behavior Lab
+                </h3>
+                <p style={{ fontSize: '0.92rem', color: 'var(--text-muted)', marginBottom: '1.2rem', lineHeight: 1.6 }}>
+                  Isolated Virtual Machine sandbox environment configured for dynamic malware analysis, Sysinternals process tracking, and network C2 traffic logging.
+                </p>
               </div>
-              <a href="https://github.com/Amans66/Delta-Malware-Lab" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-blue)', textDecoration: 'none', fontSize: '0.85rem', fontFamily: 'var(--font-mono)' }}>
-                GitHub Repo <FiExternalLink />
-              </a>
+
+              <div>
+                <div style={{ marginBottom: '1rem' }}>
+                  <span className="badge tag-gray">VMware</span>
+                  <span className="badge tag-gray">Wireshark</span>
+                  <span className="badge tag-gray">Procmon</span>
+                </div>
+                <a href="https://github.com/Amans66/Delta-Malware-Lab" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
+                  View Repository <FiExternalLink />
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Certifications & Education */}
-      <section className="simple-section">
+      {/* Education & Certifications */}
+      <section className="section">
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
             <div>
-              <div className="section-heading" style={{ fontSize: '1.4rem' }}>
-                <FiAward /> <span>Certifications</span>
-              </div>
-              <div className="simple-card" style={{ marginBottom: 0 }}>
-                <div style={{ fontWeight: 600, color: '#fff' }}>RCS CTF (Capture The Flag)</div>
-                <div style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '0.8rem' }}>RCS Competition (2025)</div>
-
-                <div style={{ fontWeight: 600, color: '#fff' }}>Cyber Security & Ethical Hacking</div>
-                <div style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '0.8rem' }}>Techvanto Academy (2025)</div>
-
-                <div style={{ fontWeight: 600, color: '#fff' }}>NPTEL – Social Networks</div>
-                <div style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>NPTEL / IIT (2025)</div>
+              <h2 className="section-title" style={{ fontSize: '1.4rem' }}>Education</h2>
+              <div className="card" style={{ marginBottom: 0 }}>
+                <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.2rem' }}>
+                  B.Tech Computer Science & Engineering (Cyber Security)
+                </h3>
+                <div style={{ fontSize: '0.9rem', color: 'var(--primary)', fontWeight: 600, marginBottom: '0.4rem' }}>
+                  Lovely Professional University (2023 – Present)
+                </div>
+                <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>
+                  CGPA: 6.83
+                </div>
               </div>
             </div>
 
             <div>
-              <div className="section-heading" style={{ fontSize: '1.4rem' }}>
-                <FiBookOpen /> <span>Education</span>
-              </div>
-              <div className="simple-card" style={{ marginBottom: 0 }}>
-                <div style={{ fontWeight: 600, color: '#fff' }}>B.Tech Computer Science & Engineering (Cyber Security)</div>
-                <div style={{ color: 'var(--accent-blue)', fontSize: '0.85rem', marginBottom: '0.4rem' }}>Lovely Professional University (2023 – Present)</div>
-                <div style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>CGPA: 6.83</div>
+              <h2 className="section-title" style={{ fontSize: '1.4rem' }}>Certifications</h2>
+              <div className="card" style={{ marginBottom: 0 }}>
+                <div style={{ fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.2rem' }}>RCS CTF (Capture The Flag)</div>
+                <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '0.8rem' }}>RCS Competition (2025)</div>
+
+                <div style={{ fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.2rem' }}>Cyber Security & Ethical Hacking</div>
+                <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '0.8rem' }}>Techvanto Academy (2025)</div>
+
+                <div style={{ fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.2rem' }}>NPTEL – Social Networks</div>
+                <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>NPTEL / IIT (2025)</div>
               </div>
             </div>
           </div>
@@ -232,35 +277,33 @@ export default function App() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="simple-section" style={{ borderBottom: 'none' }}>
+      <section id="contact" className="section" style={{ borderBottom: 'none' }}>
         <div className="container">
-          <div className="section-heading">
-            <FiMail /> Get In <span>Touch</span>
-          </div>
+          <h2 className="section-title">Get in Touch</h2>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
-            <div className="simple-card" style={{ marginBottom: 0 }}>
-              <h3 style={{ color: '#fff', marginBottom: '1rem' }}>Contact Details</h3>
-              <p style={{ color: 'var(--text-secondary)', marginBottom: '0.6rem' }}>
-                <strong>Email:</strong> <a href="mailto:amansinghbhadauria2005@gmail.com" style={{ color: 'var(--accent-blue)' }}>amansinghbhadauria2005@gmail.com</a>
+            <div className="card" style={{ marginBottom: 0 }}>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1.2rem' }}>Contact Details</h3>
+              <p style={{ color: 'var(--text-muted)', marginBottom: '0.8rem' }}>
+                <strong>Email:</strong> <a href="mailto:amansinghbhadauria2005@gmail.com" style={{ color: 'var(--primary)' }}>amansinghbhadauria2005@gmail.com</a>
               </p>
-              <p style={{ color: 'var(--text-secondary)', marginBottom: '0.6rem' }}>
+              <p style={{ color: 'var(--text-muted)', marginBottom: '0.8rem' }}>
                 <strong>Phone:</strong> +91-7291810034
               </p>
-              <p style={{ color: 'var(--text-secondary)', marginBottom: '1.2rem' }}>
+              <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem' }}>
                 <strong>Location:</strong> Rohta, Agra, Uttar Pradesh, India
               </p>
 
               <div style={{ display: 'flex', gap: '1rem' }}>
-                <a href="https://github.com/Amans66" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-green)', fontSize: '1.3rem' }}><FiGithub /></a>
-                <a href="https://www.linkedin.com/in/aman-singh66/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-blue)', fontSize: '1.3rem' }}><FiLinkedin /></a>
+                <a href="https://github.com/Amans66" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-main)', fontSize: '1.4rem' }}><FiGithub /></a>
+                <a href="https://www.linkedin.com/in/aman-singh66/" target="_blank" rel="noopener noreferrer" style={{ color: '#0a66c2', fontSize: '1.4rem' }}><FiLinkedin /></a>
               </div>
             </div>
 
-            <div className="simple-card" style={{ marginBottom: 0 }}>
+            <div className="card" style={{ marginBottom: 0 }}>
               {submitted ? (
-                <div style={{ color: 'var(--accent-green)', textAlign: 'center', padding: '2rem 0' }}>
-                  ✓ Message Sent Successfully! Thank you.
+                <div style={{ color: '#16a34a', fontWeight: 600, textAlign: 'center', padding: '2rem 0' }}>
+                  ✓ Thank you! Your message has been sent.
                 </div>
               ) : (
                 <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -268,21 +311,21 @@ export default function App() {
                     type="text"
                     required
                     placeholder="Your Name"
-                    style={{ padding: '0.75rem', background: '#0b0f19', border: '1px solid var(--border-color)', borderRadius: '6px', color: '#fff', outline: 'none' }}
+                    style={{ padding: '0.75rem', background: '#ffffff', border: '1px solid var(--border)', borderRadius: '6px', fontSize: '0.9rem', color: 'var(--text-main)', outline: 'none' }}
                   />
                   <input
                     type="email"
                     required
                     placeholder="Your Email"
-                    style={{ padding: '0.75rem', background: '#0b0f19', border: '1px solid var(--border-color)', borderRadius: '6px', color: '#fff', outline: 'none' }}
+                    style={{ padding: '0.75rem', background: '#ffffff', border: '1px solid var(--border)', borderRadius: '6px', fontSize: '0.9rem', color: 'var(--text-main)', outline: 'none' }}
                   />
                   <textarea
                     required
                     rows="3"
                     placeholder="Your Message"
-                    style={{ padding: '0.75rem', background: '#0b0f19', border: '1px solid var(--border-color)', borderRadius: '6px', color: '#fff', outline: 'none' }}
+                    style={{ padding: '0.75rem', background: '#ffffff', border: '1px solid var(--border)', borderRadius: '6px', fontSize: '0.9rem', color: 'var(--text-main)', outline: 'none', resize: 'vertical' }}
                   />
-                  <button type="submit" className="btn btn-primary">
+                  <button type="submit" className="btn-primary" style={{ justifyContent: 'center' }}>
                     Send Message
                   </button>
                 </form>
@@ -295,7 +338,7 @@ export default function App() {
       {/* Footer */}
       <footer className="footer">
         <div className="container">
-          © {new Date().getFullYear()} Aman Singh — Cybersecurity Analyst. All rights reserved.
+          © {new Date().getFullYear()} Aman Singh. All rights reserved.
         </div>
       </footer>
     </div>
