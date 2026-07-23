@@ -130,6 +130,23 @@ function ScanAnimation({ logs, featured, onRestrictedClick }) {
 
 export default function Projects() {
   const [restrictedDelta, setRestrictedDelta] = useState(false);
+  const [tiltState, setTiltState] = useState({});
+
+  const handleMouseMove = (e, idx) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * -5;
+    const rotateY = ((x - centerX) / centerX) * 5;
+    setTiltState((prev) => ({ ...prev, [idx]: { rotateX, rotateY } }));
+  };
+
+  const handleMouseLeave = (idx) => {
+    setTiltState((prev) => ({ ...prev, [idx]: { rotateX: 0, rotateY: 0 } }));
+  };
 
   return (
     <section id="projects" className="section">
@@ -156,12 +173,20 @@ export default function Projects() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: i * 0.2 }}
-            style={project.featured ? {
-              gridColumn: '1 / -1',
-              boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(189, 0, 255, 0.15)',
-              borderTopColor: 'rgba(189, 0, 255, 0.5)',
-              borderLeftColor: 'rgba(189, 0, 255, 0.5)'
-            } : {}}
+            onMouseMove={(e) => handleMouseMove(e, i)}
+            onMouseLeave={() => handleMouseLeave(i)}
+            style={{
+              ...(project.featured ? {
+                gridColumn: '1 / -1',
+                boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(189, 0, 255, 0.15)',
+                borderTopColor: 'rgba(189, 0, 255, 0.5)',
+                borderLeftColor: 'rgba(189, 0, 255, 0.5)'
+              } : {}),
+              transform: tiltState[i]
+                ? `perspective(1000px) rotateX(${tiltState[i].rotateX}deg) rotateY(${tiltState[i].rotateY}deg)`
+                : 'perspective(1000px) rotateX(0deg) rotateY(0deg)',
+              transition: 'transform 0.15s ease-out',
+            }}
           >
             <div className="project-header" style={project.featured ? { background: 'linear-gradient(to right, #240b36, #11141b)', borderBottom: '1px solid rgba(189,0,255,0.2)' } : {}}>
               <div className="dot r" />

@@ -4,8 +4,8 @@ import { useInView } from 'react-intersection-observer';
 import { FiShield, FiTarget, FiCode, FiAward } from 'react-icons/fi';
 
 const stats = [
-  { icon: <FiCode />, value: 50, suffix: '+', label: 'THM Labs (Top 4%)' },
-  { icon: <FiTarget />, value: 3, suffix: '', label: 'Security Projects' },
+  { icon: <FiCode />, value: 101, suffix: '', label: 'THM Rooms (Top 4%)' },
+  { icon: <FiTarget />, value: 11, suffix: '', label: 'THM Badges' },
   { icon: <FiShield />, value: 10, suffix: '+', label: 'Systems Audited (VAPT)' },
   { icon: <FiAward />, value: 3, suffix: '', label: 'Certifications' },
 ];
