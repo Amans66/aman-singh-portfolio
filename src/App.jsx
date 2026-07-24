@@ -4,7 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import {
   FiDownload, FiMail, FiGithub, FiLinkedin, FiExternalLink, FiMapPin,
   FiShield, FiBriefcase, FiCode, FiAward, FiBookOpen, FiCopy, FiCheck,
-  FiTerminal, FiClock, FiArrowUp, FiSearch, FiCheckCircle, FiActivity
+  FiTerminal, FiClock, FiArrowUp, FiSearch, FiCheckCircle, FiActivity, FiTrendingUp
 } from 'react-icons/fi';
 import profileImg from './assets/profile.jpg';
 
@@ -20,7 +20,6 @@ const rotatingRoles = [
 const projectsData = [
   {
     id: 'threat-suite',
-    category: 'vapt',
     name: 'Threat Detection Suite',
     subtitle: 'Network Packet Sniffer & Web Vulnerability Triage System',
     period: 'Jun 2025 – Jul 2025',
@@ -38,7 +37,6 @@ const projectsData = [
   },
   {
     id: 'shieldcrypt',
-    category: 'tools',
     name: 'ShieldCrypt',
     subtitle: 'Dual-Layer AES-256 GCM CLI Encryption Tool',
     period: 'Apr 2025 – May 2025',
@@ -55,7 +53,6 @@ const projectsData = [
   },
   {
     id: 'delta-lab',
-    category: 'malware',
     name: 'Delta – Malware Behavior Lab',
     subtitle: 'Isolated Virtual Machine Sandbox Telemetry Lab',
     period: 'Oct 2025 – Jan 2026',
@@ -71,6 +68,64 @@ const projectsData = [
     ],
   },
 ];
+
+const mockSIEMAlerts = [
+  {
+    id: 'ALT-1094',
+    timestamp: '11:42:05',
+    severity: 'CRITICAL',
+    rule: 'Malware Persistence via Registry Modification',
+    source: '192.168.1.105 (Host: WIN-ANALYST01)',
+    mitre: 'T1547.001 - Registry Run Keys',
+    description: 'Process reg.exe modified HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run with executable path in AppData\\Local\\Temp.',
+    remediation: '1. Isolate host WIN-ANALYST01 from network.\n2. Kill PID 4812 (reg.exe) and delete temporary binary.\n3. Pull memory dump for deeper malware analysis.',
+  },
+  {
+    id: 'ALT-1093',
+    timestamp: '11:39:12',
+    severity: 'HIGH',
+    rule: 'Nmap SYN Stealth Port Scan Detected',
+    source: '10.0.4.88 (External IP)',
+    mitre: 'T1046 - Network Service Discovery',
+    description: 'IDS triggered on 500+ TCP SYN connection attempts within 5 seconds targeting ports 21, 22, 80, 443, 8080, and 3389.',
+    remediation: '1. Add source IP 10.0.4.88 to edge firewall blocklist.\n2. Verify target host port exposure.\n3. Check web application logs for follow-up payloads.',
+  },
+  {
+    id: 'ALT-1092',
+    timestamp: '11:35:40',
+    severity: 'MEDIUM',
+    rule: 'Web Application SQL Injection Attempt',
+    source: '172.16.0.45',
+    mitre: 'T1190 - Exploit Public-Facing Application',
+    description: 'HTTP POST request to /api/login contained SQLi payload: UNION SELECT username, password FROM users --',
+    remediation: '1. Confirm web application WAF blocked payload (HTTP 403).\n2. Audit authentication endpoint for parameterized queries.\n3. Flag IP for rate limiting.',
+  },
+];
+
+function generateTHMActivityGrid() {
+  const COLS = 52;
+  const ROWS = 7;
+  const cells = [];
+  
+  for (let col = 0; col < COLS; col++) {
+    for (let row = 0; row < ROWS; row++) {
+      let val = 0;
+      if (col >= 13 && col <= 24) {
+        if ((row === 0 || row === 2 || row === 4 || row === 6) && col === 20) {
+          val = 2;
+        } else if (Math.random() > 0.15) {
+          val = Math.random() > 0.4 ? 4 : 3;
+        } else {
+          val = 0;
+        }
+      } else if (col >= 10 && col <= 12) {
+        val = Math.random() > 0.6 ? 1 : 0;
+      }
+      cells.push(val === 0 ? 'thm-cell' : `thm-cell thm-l${val}`);
+    }
+  }
+  return cells;
+}
 
 function AnimatedCounter({ target, suffix = '', inView }) {
   const [count, setCount] = useState(0);
@@ -114,15 +169,18 @@ export default function App() {
   const [skillFilter, setSkillFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [activeDemo, setActiveDemo] = useState(null);
+  const [selectedAlert, setSelectedAlert] = useState(mockSIEMAlerts[0]);
 
   // Clocks
   const [utcTime, setUtcTime] = useState('');
   const [istTime, setIstTime] = useState('');
 
-  // Intersection Observers for Scroll Counting
+  // Intersection Observers
   const { ref: statsRef, inView: statsInView } = useInView({ threshold: 0.3, triggerOnce: true });
 
-  // Scroll Progress & Active Nav Tracking
+  const thmCells = generateTHMActivityGrid();
+
+  // Scroll Progress & Nav Observer
   useEffect(() => {
     const handleScroll = () => {
       const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -144,7 +202,7 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Rotating Typewriter Effect
+  // Typewriter Loop
   useEffect(() => {
     const currentRole = rotatingRoles[roleIndex];
     let timer;
@@ -168,7 +226,7 @@ export default function App() {
     return () => clearTimeout(timer);
   }, [typedRole, isDeleting, roleIndex]);
 
-  // Clock Timer
+  // Clocks
   useEffect(() => {
     const timer = setInterval(() => {
       const now = new Date();
@@ -219,10 +277,10 @@ export default function App() {
 
   return (
     <div>
-      {/* Top Scroll Progress Bar */}
+      {/* Scroll Progress Bar */}
       <div className="scroll-progress-bar" style={{ width: `${scrollProgress}%` }} />
 
-      {/* Floating Scroll to Top */}
+      {/* Floating Return to Top Button */}
       <AnimatePresence>
         {showTopBtn && (
           <motion.button
@@ -248,7 +306,9 @@ export default function App() {
             <li><a href="#about" className={activeNav === 'about' ? 'nav-active' : ''}>About</a></li>
             <li><a href="#experience" className={activeNav === 'experience' ? 'nav-active' : ''}>Experience</a></li>
             <li><a href="#skills" className={activeNav === 'skills' ? 'nav-active' : ''}>Skills</a></li>
+            <li><a href="#soc" className={activeNav === 'soc' ? 'nav-active' : ''}>SOC Dashboard</a></li>
             <li><a href="#projects" className={activeNav === 'projects' ? 'nav-active' : ''}>Projects</a></li>
+            <li><a href="#tryhackme" className={activeNav === 'tryhackme' ? 'nav-active' : ''}>TryHackMe</a></li>
             <li><a href="#contact" className={activeNav === 'contact' ? 'nav-active' : ''}>Contact</a></li>
           </ul>
         </div>
@@ -257,7 +317,7 @@ export default function App() {
       {/* Hero Section */}
       <section id="home" className="section" style={{ paddingTop: '4rem', paddingBottom: '4rem' }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3.5rem', alignItems: 'center' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3.5rem', alignItems: 'center' }}>
             
             <motion.div
               initial={{ opacity: 0, y: 25 }}
@@ -273,7 +333,7 @@ export default function App() {
               </div>
 
               <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2.4rem, 5vw, 3.8rem)', fontWeight: 800, lineHeight: 1.15, marginBottom: '1rem', color: '#fff' }}>
-                Hi, I'm Aman Singh
+                Aman Singh
               </h1>
 
               {/* Rotating Typewriter Role */}
@@ -283,8 +343,8 @@ export default function App() {
                 <span style={{ width: '3px', height: '1.2em', background: 'var(--primary)', marginLeft: '4px', display: 'inline-block' }} />
               </div>
 
-              <p style={{ fontSize: '1.05rem', color: 'var(--text-muted)', marginBottom: '1.8rem', lineHeight: 1.7, maxWidth: '600px' }}>
-                Aspiring Cybersecurity Analyst with hands-on experience in <span style={{ color: 'var(--primary)', fontWeight: 600 }}>Vulnerability Assessment & Penetration Testing (VAPT)</span>, malware analysis, network security, and secure software development. Proficient in Burp Suite, OWASP ZAP, Nmap, Wireshark, Python, and Kali Linux.
+              <p style={{ fontSize: '1.05rem', color: 'var(--text-muted)', marginBottom: '1.8rem', lineHeight: 1.7, maxWidth: '620px' }}>
+                Aspiring Cybersecurity Analyst with hands-on experience in <span style={{ color: 'var(--primary)', fontWeight: 600 }}>Vulnerability Assessment & Penetration Testing (VAPT)</span>, malware analysis, network security, and secure software development. Proficient in Burp Suite, OWASP ZAP, Nmap, Nikto, Wireshark, Python, and Kali Linux.
               </p>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.9rem', color: 'var(--text-light)', marginBottom: '2rem' }}>
@@ -314,7 +374,7 @@ export default function App() {
               transition={{ duration: 0.6, delay: 0.2 }}
               style={{ display: 'flex', justifyContent: 'center' }}
             >
-              <div className="card" style={{ width: '100%', maxWidth: '340px', textAlign: 'center', padding: '2rem', marginBottom: 0, borderColor: 'rgba(99, 102, 241, 0.3)' }}>
+              <div className="glass-card" style={{ width: '100%', maxWidth: '340px', textAlign: 'center', padding: '2rem', marginBottom: 0, borderColor: 'rgba(99, 102, 241, 0.3)' }}>
                 <div style={{ position: 'relative', width: '190px', height: '190px', margin: '0 auto 1.5rem', borderRadius: '50%', overflow: 'hidden', border: '3px solid var(--primary)', boxShadow: '0 0 30px rgba(99, 102, 241, 0.3)' }}>
                   <img
                     src={profileImg}
@@ -346,16 +406,17 @@ export default function App() {
       {/* About & Stats Counter Section */}
       <section id="about" className="section" ref={statsRef}>
         <div className="container">
-          <div className="section-title">
-            <FiShield /> About <span>& Background</span>
-          </div>
+          <div className="section-tag"><FiShield /> // CAREER SUMMARY</div>
+          <h2 className="section-title">
+            About <span className="highlight">& Background</span>
+          </h2>
 
-          <div className="card">
+          <div className="glass-card" style={{ marginBottom: '2rem' }}>
             <h3 style={{ fontSize: '1.3rem', color: '#fff', marginBottom: '0.8rem' }}>
               Career Profile
             </h3>
             <p style={{ color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: '1.5rem' }}>
-              Specializing in auditing web applications and internal network infrastructure to identify security vulnerabilities, endpoints misconfigurations, and OWASP Top 10 flaws. Top 4% ranking on TryHackMe with 101 completed practical security labs covering web exploitation, privilege escalation, networking, and defensive operations.
+              Specializing in auditing web applications and internal network infrastructure to identify security vulnerabilities, endpoint misconfigurations, and OWASP Top 10 flaws. Top 4% ranking on TryHackMe with 101 completed practical security labs covering web exploitation, privilege escalation, networking, and defensive operations.
             </p>
 
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
@@ -368,7 +429,7 @@ export default function App() {
 
           {/* Animated Stats Cards */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.25rem' }}>
-            <div className="card" style={{ textAlign: 'center', padding: '1.5rem', marginBottom: 0 }}>
+            <div className="glass-card" style={{ textAlign: 'center', padding: '1.5rem', marginBottom: 0 }}>
               <div style={{ fontSize: '1.8rem', color: 'var(--primary)', marginBottom: '0.3rem' }}><FiCode /></div>
               <div style={{ fontFamily: 'var(--font-heading)', fontSize: '2.2rem', fontWeight: 800, color: '#fff' }}>
                 <AnimatedCounter target={101} inView={statsInView} />
@@ -378,7 +439,7 @@ export default function App() {
               </div>
             </div>
 
-            <div className="card" style={{ textAlign: 'center', padding: '1.5rem', marginBottom: 0 }}>
+            <div className="glass-card" style={{ textAlign: 'center', padding: '1.5rem', marginBottom: 0 }}>
               <div style={{ fontSize: '1.8rem', color: 'var(--cyan)', marginBottom: '0.3rem' }}><FiAward /></div>
               <div style={{ fontFamily: 'var(--font-heading)', fontSize: '2.2rem', fontWeight: 800, color: '#fff' }}>
                 <AnimatedCounter target={11} inView={statsInView} />
@@ -388,7 +449,7 @@ export default function App() {
               </div>
             </div>
 
-            <div className="card" style={{ textAlign: 'center', padding: '1.5rem', marginBottom: 0 }}>
+            <div className="glass-card" style={{ textAlign: 'center', padding: '1.5rem', marginBottom: 0 }}>
               <div style={{ fontSize: '1.8rem', color: 'var(--emerald)', marginBottom: '0.3rem' }}><FiShield /></div>
               <div style={{ fontFamily: 'var(--font-heading)', fontSize: '2.2rem', fontWeight: 800, color: '#fff' }}>
                 <AnimatedCounter target={10} suffix="+" inView={statsInView} />
@@ -398,7 +459,7 @@ export default function App() {
               </div>
             </div>
 
-            <div className="card" style={{ textAlign: 'center', padding: '1.5rem', marginBottom: 0 }}>
+            <div className="glass-card" style={{ textAlign: 'center', padding: '1.5rem', marginBottom: 0 }}>
               <div style={{ fontSize: '1.8rem', color: 'var(--primary)', marginBottom: '0.3rem' }}><FiAward /></div>
               <div style={{ fontFamily: 'var(--font-heading)', fontSize: '2.2rem', fontWeight: 800, color: '#fff' }}>
                 <AnimatedCounter target={3} inView={statsInView} />
@@ -412,14 +473,15 @@ export default function App() {
         </div>
       </section>
 
-      {/* Experience Section */}
+      {/* Work Experience Section */}
       <section id="experience" className="section">
         <div className="container">
-          <div className="section-title">
-            <FiBriefcase /> Work <span>Experience</span>
-          </div>
+          <div className="section-tag"><FiBriefcase /> // PROFESSIONAL EXPERIENCE</div>
+          <h2 className="section-title">
+            Work <span className="highlight">Experience</span>
+          </h2>
 
-          <div className="card">
+          <div className="glass-card">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.6rem' }}>
               <div>
                 <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#fff', margin: 0 }}>
@@ -444,12 +506,13 @@ export default function App() {
         </div>
       </section>
 
-      {/* Technical Skills Section with Interactive Filter Tabs */}
+      {/* Technical Skills Section with Search & Category Tabs */}
       <section id="skills" className="section">
         <div className="container">
-          <div className="section-title">
-            <FiCode /> Technical <span>Skills & Toolkit</span>
-          </div>
+          <div className="section-tag"><FiCode /> // TECHNICAL ARSENAL</div>
+          <h2 className="section-title">
+            Technical <span className="highlight">Skills & Toolkit</span>
+          </h2>
 
           {/* Interactive Search & Filter Bar */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.8rem' }}>
@@ -500,16 +563,79 @@ export default function App() {
         </div>
       </section>
 
-      {/* Key Projects Section with Live Interactive Scan Simulator */}
+      {/* SOC Dashboard Section */}
+      <section id="soc" className="section">
+        <div className="container">
+          <div className="section-tag"><FiActivity /> // SOC ALERT TRIAGE</div>
+          <h2 className="section-title">
+            SIEM Log & <span className="highlight-cyan">Triage Operations</span>
+          </h2>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+            <div className="glass-card">
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: 'var(--emerald)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <span className="live-dot" /> SIEM ALERT STREAM
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+                {mockSIEMAlerts.map((alert) => (
+                  <div
+                    key={alert.id}
+                    onClick={() => setSelectedAlert(alert)}
+                    style={{
+                      padding: '0.9rem',
+                      borderRadius: '8px',
+                      background: selectedAlert.id === alert.id ? 'rgba(99, 102, 241, 0.18)' : 'rgba(15, 23, 42, 0.6)',
+                      border: selectedAlert.id === alert.id ? '1px solid var(--primary)' : '1px solid rgba(255,255,255,0.08)',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease',
+                    }}
+                  >
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.3rem' }}>
+                      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', fontWeight: 'bold', padding: '0.15rem 0.5rem', borderRadius: '4px', background: alert.severity === 'CRITICAL' ? 'rgba(239, 68, 68, 0.2)' : 'rgba(6, 182, 212, 0.2)', color: alert.severity === 'CRITICAL' ? '#ef4444' : '#22d3ee' }}>
+                        {alert.severity}
+                      </span>
+                      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--text-light)' }}>{alert.timestamp}</span>
+                    </div>
+                    <div style={{ fontFamily: 'var(--font-heading)', fontSize: '0.88rem', color: '#fff' }}>{alert.rule}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: 'var(--cyan)', marginBottom: '0.8rem' }}>
+                  L0 TRIAGE WORKFLOW — {selectedAlert.id}
+                </div>
+                <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.1rem', color: '#fff', marginBottom: '0.6rem' }}>
+                  {selectedAlert.rule}
+                </h4>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78rem', color: 'var(--emerald)', marginBottom: '0.8rem' }}>
+                  MITRE: {selectedAlert.mitre}
+                </div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78rem', color: 'var(--text-muted)', lineHeight: '1.6', background: 'rgba(5, 8, 22, 0.8)', padding: '0.8rem', borderRadius: '6px', marginBottom: '1rem' }}>
+                  {selectedAlert.description}
+                </div>
+              </div>
+              <pre style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--emerald)', whiteSpace: 'pre-wrap', background: 'rgba(5, 12, 20, 0.8)', padding: '0.8rem', borderRadius: '6px', border: '1px solid rgba(16, 185, 129, 0.3)', margin: 0 }}>
+                {selectedAlert.remediation}
+              </pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Key Projects Section */}
       <section id="projects" className="section">
         <div className="container">
-          <div className="section-title">
-            <FiBriefcase /> Key <span>Security Projects</span>
-          </div>
+          <div className="section-tag"><FiBriefcase /> // FEATURED SECURITY PROJECTS</div>
+          <h2 className="section-title">
+            Key <span className="highlight">Security Projects</span>
+          </h2>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.8rem' }}>
             {projectsData.map((project, i) => (
-              <div key={project.id} className="card" style={{ marginBottom: 0, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <div key={project.id} className="glass-card" style={{ marginBottom: 0, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                 <div>
                   <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--text-light)', marginBottom: '0.4rem' }}>
                     {project.period}
@@ -575,6 +701,45 @@ export default function App() {
         </div>
       </section>
 
+      {/* TryHackMe Live Section */}
+      <section id="tryhackme" className="section">
+        <div className="container">
+          <div className="section-tag"><FiTrendingUp /> // TRYHACKME DASHBOARD</div>
+          <h2 className="section-title">
+            TryHackMe <span className="highlight-cyan">Live Metrics</span>
+          </h2>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', marginBottom: '2rem' }}>
+            <div className="glass-card" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <iframe
+                src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=AmanHacker404"
+                style={{ border: 'none', width: '350px', height: '240px' }}
+                title="TryHackMe Badge"
+              />
+            </div>
+
+            <div className="glass-card">
+              <h3 style={{ color: '#fff', fontSize: '1.2rem', marginBottom: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span>Contribution Activity</span>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'var(--emerald)' }}>1,208 Events</span>
+              </h3>
+
+              <div className="thm-heatmap">
+                {thmCells.map((cls, ci) => (
+                  <div key={ci} className={cls} />
+                ))}
+              </div>
+
+              <div style={{ marginTop: '1rem', textAlign: 'right' }}>
+                <a href="https://tryhackme.com/p/AmanHacker404" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--cyan)', textDecoration: 'none', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
+                  View Full Profile <FiExternalLink />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Certifications & Education */}
       <section className="section">
         <div className="container">
@@ -583,7 +748,7 @@ export default function App() {
               <div className="section-title" style={{ fontSize: '1.4rem' }}>
                 <FiAward /> Certifications
               </div>
-              <div className="card" style={{ marginBottom: 0 }}>
+              <div className="glass-card" style={{ marginBottom: 0 }}>
                 <div style={{ fontWeight: 700, color: '#fff', fontSize: '1.05rem', marginBottom: '0.2rem' }}>RCS CTF (Capture The Flag)</div>
                 <div style={{ fontSize: '0.85rem', color: 'var(--cyan)', fontFamily: 'var(--font-mono)', marginBottom: '1rem' }}>RCS Competition (2025)</div>
 
@@ -599,7 +764,7 @@ export default function App() {
               <div className="section-title" style={{ fontSize: '1.4rem' }}>
                 <FiBookOpen /> Education
               </div>
-              <div className="card" style={{ marginBottom: 0 }}>
+              <div className="glass-card" style={{ marginBottom: 0 }}>
                 <div style={{ fontWeight: 700, color: '#fff', fontSize: '1.05rem', marginBottom: '0.2rem' }}>
                   B.Tech CSE (Cyber Security)
                 </div>
@@ -623,7 +788,7 @@ export default function App() {
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2.5rem' }}>
-            <div className="card" style={{ marginBottom: 0 }}>
+            <div className="glass-card" style={{ marginBottom: 0 }}>
               <h3 style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: '1.2rem', color: '#fff' }}>
                 Contact Information
               </h3>
@@ -664,7 +829,7 @@ export default function App() {
               </div>
             </div>
 
-            <div className="card" style={{ marginBottom: 0 }}>
+            <div className="glass-card" style={{ marginBottom: 0 }}>
               {formSubmitted ? (
                 <div style={{ color: 'var(--emerald)', fontWeight: 600, textAlign: 'center', padding: '3rem 1rem' }}>
                   <FiCheckCircle style={{ fontSize: '3rem', marginBottom: '0.8rem' }} />
