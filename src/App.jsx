@@ -479,7 +479,7 @@ export default function App() {
             <div className="glass-card" style={{ textAlign: 'center', padding: '1.5rem', marginBottom: 0 }}>
               <div style={{ fontSize: '1.8rem', color: 'var(--emerald)', marginBottom: '0.3rem' }}><FiShield /></div>
               <div style={{ fontFamily: 'var(--font-heading)', fontSize: '2.2rem', fontWeight: 800, color: '#fff' }}>
-                <AnimatedCounter target={10} suffix="+" inView={statsInView} />
+                <AnimatedCounter target={2} inView={statsInView} />
               </div>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78rem', color: 'var(--text-light)' }}>
                 Systems Audited (VAPT)
