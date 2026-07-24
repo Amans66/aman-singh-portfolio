@@ -710,12 +710,60 @@ export default function App() {
           </h2>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', marginBottom: '2rem' }}>
-            <div className="glass-card" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              <iframe
-                src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=AmanHacker404"
-                style={{ border: 'none', width: '350px', height: '240px' }}
-                title="TryHackMe Badge"
-              />
+            <div className="glass-card" style={{ padding: '1.8rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', border: '1px solid rgba(162, 56, 255, 0.4)', background: 'linear-gradient(135deg, rgba(20, 10, 35, 0.85) 0%, rgba(10, 15, 30, 0.95) 100%)' }}>
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.2rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                    <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: '#a238ff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', color: '#fff', fontSize: '1.1rem', fontFamily: 'var(--font-heading)', boxShadow: '0 0 12px rgba(162, 56, 255, 0.6)' }}>
+                      THM
+                    </div>
+                    <div>
+                      <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.15rem', color: '#fff', fontWeight: 700 }}>
+                        AmanHacker404
+                      </div>
+                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--emerald)', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                        <span className="live-dot" /> VERIFIED THM PROFILE
+                      </div>
+                    </div>
+                  </div>
+
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78rem', padding: '0.3rem 0.75rem', borderRadius: '20px', background: 'rgba(0, 255, 157, 0.15)', border: '1px solid rgba(0, 255, 157, 0.4)', color: 'var(--emerald)', fontWeight: 600 }}>
+                    TOP 4%
+                  </span>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.8rem', marginBottom: '1.4rem' }}>
+                  <div style={{ background: 'rgba(15, 23, 42, 0.8)', padding: '0.8rem', borderRadius: '8px', borderLeft: '3px solid #a238ff' }}>
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--text-light)' }}>GLOBAL RANK</div>
+                    <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', color: '#fff', fontWeight: 800 }}>76,550</div>
+                  </div>
+
+                  <div style={{ background: 'rgba(15, 23, 42, 0.8)', padding: '0.8rem', borderRadius: '8px', borderLeft: '3px solid var(--emerald)' }}>
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--text-light)' }}>ROOMS SOLVED</div>
+                    <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', color: '#fff', fontWeight: 800 }}>101 Labs</div>
+                  </div>
+
+                  <div style={{ background: 'rgba(15, 23, 42, 0.8)', padding: '0.8rem', borderRadius: '8px', borderLeft: '3px solid var(--cyan)' }}>
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--text-light)' }}>BADGES</div>
+                    <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', color: '#fff', fontWeight: 800 }}>11 Badges</div>
+                  </div>
+
+                  <div style={{ background: 'rgba(15, 23, 42, 0.8)', padding: '0.8rem', borderRadius: '8px', borderLeft: '3px solid #f59e0b' }}>
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--text-light)' }}>2026 EVENTS</div>
+                    <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', color: '#fff', fontWeight: 800 }}>1,208</div>
+                  </div>
+                </div>
+              </div>
+
+              <a
+                href="https://tryhackme.com/p/AmanHacker404"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary"
+                style={{ justifyContent: 'center', width: '100%', fontSize: '0.85rem', padding: '0.6rem 1rem', background: '#a238ff', borderColor: '#a238ff', boxShadow: '0 0 15px rgba(162, 56, 255, 0.4)' }}
+              >
+                View Official THM Profile <FiExternalLink />
+              </a>
             </div>
 
             <div className="glass-card">
