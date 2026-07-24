@@ -150,6 +150,20 @@ function AnimatedCounter({ target, suffix = '', inView }) {
   return <>{count}{suffix}</>;
 }
 
+function FadeInSection({ children, delay = 0 }) {
+  const { ref, inView } = useInView({ threshold: 0.15, triggerOnce: true });
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
 export default function App() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [showTopBtn, setShowTopBtn] = useState(false);
@@ -280,6 +294,14 @@ export default function App() {
       {/* Scroll Progress Bar */}
       <div className="scroll-progress-bar" style={{ width: `${scrollProgress}%` }} />
 
+      {/* Ambient Floating Orbs Background */}
+      <div className="ambient-bg">
+        <div className="orb orb-1" />
+        <div className="orb orb-2" />
+        <div className="orb orb-3" />
+      </div>
+      <div className="dot-grid" />
+
       {/* Floating Return to Top Button */}
       <AnimatePresence>
         {showTopBtn && (
@@ -340,7 +362,7 @@ export default function App() {
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'clamp(1.25rem, 2.5vw, 1.75rem)', color: 'var(--cyan)', fontWeight: 600, marginBottom: '1.5rem', minHeight: '40px', display: 'flex', alignItems: 'center' }}>
                 <span style={{ color: 'var(--text-dim)', marginRight: '8px' }}>&gt;</span>
                 <span>{typedRole}</span>
-                <span style={{ width: '3px', height: '1.2em', background: 'var(--primary)', marginLeft: '4px', display: 'inline-block' }} />
+                <span className="blink-cursor" />
               </div>
 
               <p style={{ fontSize: '1.1rem', color: 'var(--text-muted)', marginBottom: '2rem', lineHeight: 1.75, maxWidth: '750px' }}>
@@ -375,7 +397,8 @@ export default function App() {
               style={{ display: 'flex', justifyContent: 'center' }}
             >
               <div className="glass-card" style={{ width: '100%', maxWidth: '380px', textAlign: 'center', padding: '2.2rem', marginBottom: 0, borderColor: 'rgba(99, 102, 241, 0.3)' }}>
-                <div style={{ position: 'relative', width: '210px', height: '210px', margin: '0 auto 1.5rem', borderRadius: '50%', overflow: 'hidden', border: '3px solid var(--primary)', boxShadow: '0 0 35px rgba(99, 102, 241, 0.35)' }}>
+
+                <div className="avatar-ring" style={{ position: 'relative', width: '210px', height: '210px', margin: '0 auto 1.5rem', borderRadius: '50%', overflow: 'hidden', border: '3px solid var(--primary)' }}>
                   <img
                     src={profileImg}
                     alt="Aman Singh"
@@ -406,11 +429,14 @@ export default function App() {
       {/* About & Stats Counter Section */}
       <section id="about" className="section" ref={statsRef}>
         <div className="container">
+        <FadeInSection>
           <div className="section-tag"><FiShield /> // CAREER SUMMARY</div>
           <h2 className="section-title">
             About <span className="highlight">& Background</span>
           </h2>
 
+          </FadeInSection>
+          <FadeInSection delay={0.1}>
           <div className="glass-card" style={{ marginBottom: '2rem' }}>
             <h3 style={{ fontSize: '1.3rem', color: '#fff', marginBottom: '0.8rem' }}>
               Career Profile
@@ -427,6 +453,7 @@ export default function App() {
             </div>
           </div>
 
+          </FadeInSection>
           {/* Animated Stats Cards */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.25rem' }}>
             <div className="glass-card" style={{ textAlign: 'center', padding: '1.5rem', marginBottom: 0 }}>
@@ -476,6 +503,7 @@ export default function App() {
       {/* Work Experience Section */}
       <section id="experience" className="section">
         <div className="container">
+        <FadeInSection>
           <div className="section-tag"><FiBriefcase /> // PROFESSIONAL EXPERIENCE</div>
           <h2 className="section-title">
             Work <span className="highlight">Experience</span>
@@ -503,12 +531,14 @@ export default function App() {
               <li>Worked with senior analysts during penetration testing engagements and attack simulations.</li>
             </ul>
           </div>
+          </FadeInSection>
         </div>
       </section>
 
       {/* Technical Skills Section with Search & Category Tabs */}
       <section id="skills" className="section">
         <div className="container">
+        <FadeInSection>
           <div className="section-tag"><FiCode /> // TECHNICAL ARSENAL</div>
           <h2 className="section-title">
             Technical <span className="highlight">Skills & Toolkit</span>
@@ -560,6 +590,7 @@ export default function App() {
               </motion.span>
             ))}
           </div>
+          </FadeInSection>
         </div>
       </section>
 
