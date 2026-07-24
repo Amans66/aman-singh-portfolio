@@ -315,9 +315,9 @@ export default function App() {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="section" style={{ paddingTop: '4rem', paddingBottom: '4rem' }}>
+      <section id="home" className="section" style={{ paddingTop: '4.5rem', paddingBottom: '4.5rem' }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3.5rem', alignItems: 'center' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '4rem', alignItems: 'center' }}>
             
             <motion.div
               initial={{ opacity: 0, y: 25 }}
@@ -325,34 +325,34 @@ export default function App() {
               transition={{ duration: 0.6 }}
             >
               {/* Live Status Pill */}
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', padding: '0.4rem 1rem', borderRadius: '30px', background: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.3)', marginBottom: '1.2rem' }}>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', padding: '0.45rem 1.1rem', borderRadius: '30px', background: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.3)', marginBottom: '1.4rem' }}>
                 <span className="live-dot" />
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'var(--emerald)', fontWeight: 600 }}>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.82rem', color: 'var(--emerald)', fontWeight: 600 }}>
                   AVAILABLE FOR SECURITY ANALYST ROLES
                 </span>
               </div>
 
-              <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2.4rem, 5vw, 3.8rem)', fontWeight: 800, lineHeight: 1.15, marginBottom: '1rem', color: '#fff' }}>
+              <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2.6rem, 5vw, 4.2rem)', fontWeight: 800, lineHeight: 1.12, marginBottom: '1.2rem', color: '#fff' }}>
                 Aman Singh
               </h1>
 
               {/* Rotating Typewriter Role */}
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'clamp(1.2rem, 2.5vw, 1.6rem)', color: 'var(--cyan)', fontWeight: 600, marginBottom: '1.4rem', minHeight: '40px', display: 'flex', alignItems: 'center' }}>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'clamp(1.25rem, 2.5vw, 1.75rem)', color: 'var(--cyan)', fontWeight: 600, marginBottom: '1.5rem', minHeight: '40px', display: 'flex', alignItems: 'center' }}>
                 <span style={{ color: 'var(--text-dim)', marginRight: '8px' }}>&gt;</span>
                 <span>{typedRole}</span>
                 <span style={{ width: '3px', height: '1.2em', background: 'var(--primary)', marginLeft: '4px', display: 'inline-block' }} />
               </div>
 
-              <p style={{ fontSize: '1.05rem', color: 'var(--text-muted)', marginBottom: '1.8rem', lineHeight: 1.7, maxWidth: '620px' }}>
+              <p style={{ fontSize: '1.1rem', color: 'var(--text-muted)', marginBottom: '2rem', lineHeight: 1.75, maxWidth: '750px' }}>
                 Aspiring Cybersecurity Analyst with hands-on experience in <span style={{ color: 'var(--primary)', fontWeight: 600 }}>Vulnerability Assessment & Penetration Testing (VAPT)</span>, malware analysis, network security, and secure software development. Proficient in Burp Suite, OWASP ZAP, Nmap, Nikto, Wireshark, Python, and Kali Linux.
               </p>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.9rem', color: 'var(--text-light)', marginBottom: '2rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.95rem', color: 'var(--text-light)', marginBottom: '2.2rem' }}>
                 <FiMapPin style={{ color: 'var(--cyan)' }} /> Rohta, Agra, Uttar Pradesh, India
               </div>
 
               {/* CTA Buttons */}
-              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', gap: '1.2rem', flexWrap: 'wrap' }}>
                 <a
                   href="https://drive.google.com/drive/folders/10nyIP-jmDWtC1goj-8wSFlDVozgWaKBg?usp=drive_link"
                   target="_blank"
@@ -374,8 +374,8 @@ export default function App() {
               transition={{ duration: 0.6, delay: 0.2 }}
               style={{ display: 'flex', justifyContent: 'center' }}
             >
-              <div className="glass-card" style={{ width: '100%', maxWidth: '340px', textAlign: 'center', padding: '2rem', marginBottom: 0, borderColor: 'rgba(99, 102, 241, 0.3)' }}>
-                <div style={{ position: 'relative', width: '190px', height: '190px', margin: '0 auto 1.5rem', borderRadius: '50%', overflow: 'hidden', border: '3px solid var(--primary)', boxShadow: '0 0 30px rgba(99, 102, 241, 0.3)' }}>
+              <div className="glass-card" style={{ width: '100%', maxWidth: '380px', textAlign: 'center', padding: '2.2rem', marginBottom: 0, borderColor: 'rgba(99, 102, 241, 0.3)' }}>
+                <div style={{ position: 'relative', width: '210px', height: '210px', margin: '0 auto 1.5rem', borderRadius: '50%', overflow: 'hidden', border: '3px solid var(--primary)', boxShadow: '0 0 35px rgba(99, 102, 241, 0.35)' }}>
                   <img
                     src={profileImg}
                     alt="Aman Singh"

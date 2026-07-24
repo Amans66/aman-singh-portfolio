@@ -75,11 +75,11 @@ body {
   transition: width 0.05s linear;
 }
 
-/* Container */
+/* Container - Full-width utilization with max bounds */
 .container {
-  max-width: 1100px;
+  max-width: 1500px;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 2.5rem;
 }
 
 /* Navbar */
